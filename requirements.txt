@@ -1,0 +1,7 @@
+scipy
+numpy
+
+pylint
+black
+flake8
+pytest
