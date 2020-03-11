@@ -1,9 +1,13 @@
+"""
+ɪ (.venv) bleepbloop › python bleep.py; play wavy.wav
+"""
+
+
 import numpy as np
 from scipy.io.wavfile import write
-from math import pi, sin, floor
-from fractions import gcd
+from math import gcd, pi
 
-from utility import limitAmplitude, SAMPLE_RATE, writeWAVToFile
+from utility import limitAmplitude, SAMPLE_RATE
 
 
 class SoundGenerator:
@@ -36,7 +40,6 @@ class SoundGenerator:
 
     def getSampleCount(self):
         return int(self.duration * SAMPLE_RATE)
-        pass
 
     def getSinglePhaseArray(self):
         singleCycleLength = SAMPLE_RATE / float(self.frequency)
@@ -262,4 +265,10 @@ if __name__ == "__main__":
     join1 = sin1 ^ sqr1 ^ sqr2 ^ saw1 ^ chord1
     mod1 = SoundGenerator(waveType="Square", frequency=3.0, amplitude=1.0, duration=3.0)
     modjoin1 = mod1 ** join1
-    writeWAVToFile(modjoin1, "modjoin1")
+    # print(help(write))
+    write("wavy.wav", SAMPLE_RATE, modjoin1.getSound())
+    # write(SAMPLE_RATE modjoin1, "modjoin1")
+
+# from playsound import playsound
+
+# playsound("modjoin1.wav")

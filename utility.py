@@ -1,7 +1,5 @@
-import numpy as np
 from scipy.io.wavfile import write
-from math import pi, sin, floor
-from fractions import gcd
+from math import floor
 
 # from generator import SoundGenerator
 
