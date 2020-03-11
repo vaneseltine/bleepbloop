@@ -265,9 +265,22 @@ if __name__ == "__main__":
     join1 = sin1 ^ sqr1 ^ sqr2 ^ saw1 ^ chord1
     mod1 = SoundGenerator(waveType="Square", frequency=3.0, amplitude=1.0, duration=3.0)
     modjoin1 = mod1 ** join1
-    # print(help(write))
-    write("wavy.wav", SAMPLE_RATE, modjoin1.getSound())
+    print(modjoin1.getSound())
+    final = np.asarray(modjoin1.getSound()*10000, dtype=np.int16)
+    print(final)
+    write("wavy.wav", SAMPLE_RATE, final)
     # write(SAMPLE_RATE modjoin1, "modjoin1")
+
+from scipy.io.wavfile import write
+samplerate = 44100
+fs = 1000
+t = np.linspace(0., 1., samplerate)
+amplitude = np.iinfo(np.int16).max
+data = amplitude * np.sin(2. * np.pi * fs * t)
+print(data)
+data2 = np.asarray(data, dtype=np.int16)
+print(data2)
+write("example.wav", samplerate, data2)
 
 # from playsound import playsound
 
