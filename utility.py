@@ -1,5 +1,6 @@
-from scipy.io.wavfile import write
 from math import floor
+
+from scipy.io.wavfile import write
 
 # from generator import SoundGenerator
 
@@ -36,28 +37,29 @@ HALF_NOTE = 4
 QUARTER_NOTE = 2
 EIGHTH_NOTE = 1  # Smallest possible note length
 
-# Convert time in millisecs to number of smaples needed to fill that duration
+
 def convertTimeToSampleCount(time):
+    # Convert time in millisecs to number of smaples needed to fill that duration
     return int(time / (1000.0 / SAMPLE_RATE))
 
 
-# Return the duration of an eigth note in secs
 def getDurationOf8thNote(tempo):
+    # Return the duration of an eigth note in secs
     return 30.0 / tempo
 
 
-# Return the frequency of a note based on note character and octave number
-# Works on the principle that frequency of the same note character an octave higher is twice that of the current octave
-# Example : Frequncy of C2 = 2 x Frequency of C1
 def getNoteFrequency(noteChar, octave):
+    # Return the frequency of a note based on note character and octave number
+    # Works on the principle that frequency of the same note character an octave higher is twice that of the current octave
+    # Example : Frequncy of C2 = 2 x Frequency of C1
     baseFrequency = octave1Dict[noteChar]
     octaveBasedFrequency = baseFrequency * (2 ** (octave - 1))
     return octaveBasedFrequency
 
 
-# Takes the note character, current octave and the number of halfsteps and returns the pitch changed note data
-# HalfSteps: +ve = Pitch Up, -ve = Pitch Down
 def getPitchChangedData(noteChar, octave, halfSteps):
+    # Takes the note character, current octave and the number of halfsteps and returns the pitch changed note data
+    # HalfSteps: +ve = Pitch Up, -ve = Pitch Down
 
     octaveChange = floor(float(halfSteps) / 12.0)
     noteTypeChange = halfSteps % 12
@@ -68,11 +70,11 @@ def getPitchChangedData(noteChar, octave, halfSteps):
     return (newChar, newOctave)
 
 
-# Takes a SoundGenerator Object and writes the sound array as a wav file
 def writeWAVToFile(soundObj, filename):
+    # Takes a SoundGenerator Object and writes the sound array as a wav file
     write(filename + ".wav", SAMPLE_RATE, soundObj.getSound())
 
 
-# Limits the values in the sound array of a Sound Genrastor object to within -1.0 and 1.0
-def limitAmplitude(amplitude):
+def limit_amplitude(amplitude):
+    # Limits the values in the sound array of a Sound Genrastor object to within -1.0 and 1.0
     return max(min(float(amplitude), 1.0), -1.0)
