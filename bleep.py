@@ -1,5 +1,9 @@
 """
 ɪ (.venv) bleepbloop › python bleep.py; play wavy.wav
+
+https://sidparida.com/2017/03/30/python-audio-synthesis-from-scratch-a-tutorial-series-part-1-how-is-sound-stored/
+
+
 """
 
 
